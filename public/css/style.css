@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-right{
+    display: flex;
+    justify-content: space-around;
+    background-color:black;
+}
+.nav-right a{
+    color: white;
+    text-decoration: none;
+}
+.footer>p a{
+    display: flex;
+    text-align: center;
+}
+.p>a{
+    display: flex;
+    text-align: center;
+}
