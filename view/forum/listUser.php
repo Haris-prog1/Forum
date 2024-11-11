@@ -6,5 +6,5 @@ $users = $result ["data"]["users"];
 
 <?php
 foreach($users as $user ){ ?>
-    <p><a href=""?> <?= $user->getNickName() ?></a></p>
+    <p class="uk-background-default uk-padding uk-panel"><a href="index.php?ctrl=forum&action=listUser&id="?> <?= $user->getNickName() ?></a></p>
 <?php  } 

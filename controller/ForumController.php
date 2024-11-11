@@ -42,9 +42,10 @@ class ForumController extends AbstractController implements ControllerInterface{
     //     ];
     // }
     public function listTopicsByCategory($id) {
-
+        //Fonction qui permets de lister la liste des topics par catégorie
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
+        //On instancie les deux classes, topic et category
         $category = $categoryManager->findOneById($id);
         $topics = $topicManager->findTopicsByCategory($id);
 
@@ -57,20 +58,85 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-    public function listUsers($id) {
-        $topicManager = new TopicManager();
+    public function listUsers() {
+        
         $userManager = new UserManager();
         $users = $userManager->findAll();
-        $topics = $topicManager->findTopicsByCategory(id: $id);
+       
 
         return [
             "view" => VIEW_DIR."forum/listUser.php",
             "meta_description" => "Liste des users : ",
             "data" => [
                 "users" =>$users,
-                "topics" => $topics
+                
             ]
             ];
         
     }
-}
+    public function formTopic($category_id){
+            //Je crée une instance de ma classe classe Categorie Manager
+            $categoryManager = new CategoryManager();
+            //Je fais appel à la fonction find one by Id, de mon catégorieManager afin de récuperer un objet catégorie correspondant à l'id injecté en paramètre de la fonction
+            $category = $categoryManager->findOneById($category_id);
+        return [
+            "view" => VIEW_DIR."forum/formTopic.php",
+            "data" => [
+                "category" => $category,
+            ]
+            ];
+
+           
+    }
+
+
+
+
+
+
+    public function addCategory() {
+        if (isset($_POST['submit'])) {
+            $nameCategory = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
+            $categoryManager = new CategoryManager();
+            
+            if ($nameCategory) {
+                        $data = [
+                            'nameCategory' => $nameCategory,
+                        
+                        $categoryManager->add($data),
+
+                        Session::addFlash("success", "La catégorie a été rajoutée avec succès.");
+                        $this->redirectTo('forum/listCategories');
+            } else {
+                Session::addFlash("error", "Veuillez entrer un nom de catégorie valide.");
+            }
+        }
+        $categories = $categoryManager->findAll(["nameCategory", "DESC"]);
+        return [
+            "view" => VIEW_DIR."forum/addCategory.php",
+            "meta_description" => "Ajouter une catégorie : ",
+            "data" => [
+                "categories" => $categories
+            ]
+            ];
+    
+    public function detailTopic() {
+        
+        $userManager = new UserManager();
+        $users = $userManager->findOneById();
+        
+       
+
+        return [
+            "view" => VIEW_DIR."forum/detailTopic.php",
+            "meta_description" => "Liste des topics : ",
+            "data" => [
+                "topics" =>$topics,
+                
+            ]
+            ];
+        
+    }
+
+
+

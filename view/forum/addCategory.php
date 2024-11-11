@@ -3,7 +3,12 @@
     var_dump($categories);
 ?>
 
-<h1>Liste des catégories</h1>
+<h2>Ajout Categorie</h2>
+<form action="index.php?ctrl=forum&action=addCategory" method="POST">
+    <label for="NameCategory">Nom de la catégorie</label>
+    <input type="text" id="NameCategory" name="nameCategory" required>
+    <button id="submit"type=submit name="submit">Ajouter une catégorie</button>
+</form>
 
 <?php
 foreach($categories as $category ){ ?>
