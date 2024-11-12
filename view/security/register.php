@@ -8,13 +8,13 @@
 <body>
     <form action="index.php?ctrl=security&action=register" method="POST">
         <div>
-            <input id="Username" name="Utilisateur" type="text" required>Utilisateur
+            <input id="nickName" name="nickName" type="text" required>Utilisateur
         </div>
         <div>
-            <input id="Email" name="Mail" type="Mail" required>Adresse Email
+            <input id="mail" name="mail" type="mail" required>Adresse Email
         </div>
         <div>
-            <input id="Password" name="Password" type="Password" required>Mot de passe
+            <input id="password" name="password" type="password" required>Mot de passe
         </div>
         <div>
             <button  name="submit" type="submit">Inscription

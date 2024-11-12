@@ -2,8 +2,8 @@
 
 <form action="index.php?ctrl=security&action=login" method="POST">
     <div>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
+        <label for="mail">Email</label>
+        <input id="mail" name="mail" type="mail" required>
     </div>
     <div>
         <label for="password">Password</label>

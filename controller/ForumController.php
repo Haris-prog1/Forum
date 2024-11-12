@@ -22,7 +22,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             "view" => VIEW_DIR."forum/listCategories.php",
             "meta_description" => "Liste des catégories du forum",
             "data" => [
-                "categories" => $categories
+                "categories" => $categories,
             ]
         ];
     }
@@ -54,10 +54,15 @@ class ForumController extends AbstractController implements ControllerInterface{
             "meta_description" => "Liste des topics par catégorie : ".$category,
             "data" => [
                 "category" => $category,
-                "topics" => $topics
+                "topics" => $topics,
             ]
         ];
+
     }
+
+
+
+
     public function listUsers() {
         
         $userManager = new UserManager();
@@ -74,6 +79,12 @@ class ForumController extends AbstractController implements ControllerInterface{
             ];
         
     }
+
+
+
+
+
+
     public function formTopic($category_id){
             //Je crée une instance de ma classe classe Categorie Manager
             $categoryManager = new CategoryManager();
@@ -94,6 +105,8 @@ class ForumController extends AbstractController implements ControllerInterface{
 
 
 
+
+
     public function addCategory() {
         if (isset($_POST['submit'])) {
             $nameCategory = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -105,21 +118,31 @@ class ForumController extends AbstractController implements ControllerInterface{
                         
                         $categoryManager->add($data),
 
-                        Session::addFlash("success", "La catégorie a été rajoutée avec succès.");
-                        $this->redirectTo('forum/listCategories');
-            } else {
+                        Session::addFlash("success", "La catégorie a été rajoutée avec succès."),
+                        $this->redirectTo('forum/listCategories'),
+                        ];
+                        }
+                    else {
+
                 Session::addFlash("error", "Veuillez entrer un nom de catégorie valide.");
-            }
-        }
+            
+        
         $categories = $categoryManager->findAll(["nameCategory", "DESC"]);
         return [
             "view" => VIEW_DIR."forum/addCategory.php",
             "meta_description" => "Ajouter une catégorie : ",
             "data" => [
-                "categories" => $categories
+                "categories" => $categories,
             ]
             ];
+        }
     
+    }
+    }
+
+
+
+
     public function detailTopic() {
         
         $userManager = new UserManager();
@@ -140,3 +163,4 @@ class ForumController extends AbstractController implements ControllerInterface{
 
 
 
+}
