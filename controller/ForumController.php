@@ -15,14 +15,14 @@ class ForumController extends AbstractController implements ControllerInterface{
         // créer une nouvelle instance de CategoryManager
         $categoryManager = new CategoryManager();
         // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
-        $categories = $categoryManager->findAll();
+        $category = $categoryManager->findAll();
 
         // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
         return [
             "view" => VIEW_DIR."forum/listCategories.php",
             "meta_description" => "Liste des catégories du forum",
             "data" => [
-                "categories" => $categories,
+                "category" => $category,
             ]
         ];
     }
@@ -61,19 +61,19 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
-
+    
 
     public function listUsers() {
         
         $userManager = new UserManager();
-        $users = $userManager->findAll();
+        $users = $userManager->findAll(["nickName", "ASC"]);
        
 
         return [
-            "view" => VIEW_DIR."forum/listUser.php",
+            "view" => VIEW_DIR."forum/listUsers.php",
             "meta_description" => "Liste des users : ",
             "data" => [
-                "users" =>$users,
+                "user" =>$users
                 
             ]
             ];
@@ -145,11 +145,8 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     public function detailTopic() {
         
-        $userManager = new UserManager();
-        $users = $userManager->findOneById();
-        
-       
-
+        $topicManager = new TopicManager();
+        $topics = $topicManager->findAll();
         return [
             "view" => VIEW_DIR."forum/detailTopic.php",
             "meta_description" => "Liste des topics : ",
@@ -157,7 +154,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "topics" =>$topics,
                 
             ]
-            ];
+        ];
         
     }
 

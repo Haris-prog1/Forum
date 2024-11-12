@@ -11,6 +11,10 @@ final class User extends Entity{
 
     private $id;
     private $nickName;
+    private $email;
+    private $password;
+    private $dateRegistration;
+    private $role;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -50,6 +54,17 @@ final class User extends Entity{
 
         return $this;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+    
 
     public function __toString(){
         return $this->nickName;

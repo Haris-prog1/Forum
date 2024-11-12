@@ -1,4 +1,5 @@
 <?php
+//SECTION POUR LA COMMUNICATION AVEC LA BDD, table TOPIC
 namespace Model\Entities;
 
 use App\Entity;
@@ -70,12 +71,12 @@ final class Topic extends Entity{
         $this->user = $user;
         return $this;
     }
+    public function getcreationDate() {
+        return $this->creationDate;
+    }
 
     public function __toString(){
         return $this->title;
-    }
-    public function getcreationDate() {
-        return $this->creationDate;
     }
    
 }

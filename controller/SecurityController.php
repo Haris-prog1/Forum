@@ -37,36 +37,36 @@ class SecurityController extends AbstractController{
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $user = $userManager->findOnebyMail($email);
-        if($email && $password){
-        //on recherche le mot de passe associé à l'adresse mail
+        // if($email && $password){
+        // //on recherche le mot de passe associé à l'adresse mail
          
 
-            if($user){
+        //     if($user){
 
-                //récupération du mot de passe de l'user
-                $hash = $user->getPassword();
-                //  Vérification du mots de passe
-                 if(password_verify($password, $hash)){
+        //         //récupération du mot de passe de l'user
+        //         $hash = $user->getPassword();
+        //         //  Vérification du mots de passe
+        //          if(password_verify($password, $hash)){
 
-                    //on stocke l'user en Session (setUser dans App\Session)
-                    Session::setUser($user);
+        //             //on stocke l'user en Session (setUser dans App\Session)
+        //             Session::setUser($user);
                  
-                    $this->redirectTo('forum', 'listTopics');                  
-                 }else {
+        //             $this->redirectTo('forum', 'listTopics');                  
+        //          }else {
 
-                        // Message d'erreur en cas d'erreur
-                        Session::addFlash('error', 'mot de passe ou email invalide');
+        //                 // Message d'erreur en cas d'erreur
+        //                 Session::addFlash('error', 'mot de passe ou email invalide');
 
-                        $this->redirectTo('forum');
+        //                 $this->redirectTo('forum');
 
                     return [
                 "view" => VIEW_DIR."security/login.php", 
                 "meta_description" => "Connexion",
                     ];
                 
-                }  
-            }
-        }
+                // }  
+            // }
+        // }
     }
     // Fonction de deconnexion
     public function logout() {
