@@ -12,6 +12,7 @@ use App\Entity;
 final class Category extends Entity{
 
     private $id;
+    private $name;
     private $categoryName;
     
     
@@ -20,7 +21,7 @@ final class Category extends Entity{
     public function __construct($data){         
         $this->hydrate($data);        
     }
-    public function categoryName(){
+    public function getName(){
         return $this->name;
     }
     /**
@@ -67,7 +68,10 @@ final class Category extends Entity{
 
         return $this;
     }
-    
+    public function setName($name){
+        $this->name = $name;
+        return $this;
+    }
     public function __toString(){
         return $this->categoryName;
     }

@@ -12,6 +12,7 @@ final class Topic extends Entity{
 
     private $id;
     private $title;
+
     private $user;
     private $category;
     private $creationDate;
@@ -27,7 +28,7 @@ final class Topic extends Entity{
     public function getId(){
         return $this->id;
     }
-
+    
     /**
      * Set the value of id
      *
@@ -71,10 +72,7 @@ final class Topic extends Entity{
         $this->user = $user;
         return $this;
     }
-    public function getcreationDate() {
-        return $this->creationDate;
-    }
-
+   
     public function __toString(){
         return $this->title;
     }

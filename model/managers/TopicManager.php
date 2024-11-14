@@ -27,4 +27,20 @@ class TopicManager extends Manager{
             $this->className
         );
     }
+    public function listTopicsByUser($id){
+
+        
+
+        $sql = "SELECT * FROM ". $this->tableName." WHERE user_id = :id";
+        
+        return $this->getMultipleResults(
+            DAO::select($sql, ["id"=>$id]),
+            $this->className
+        );
+    }
+    public function deleteTopicsByUser($userId) {
+        // Supprimer les topics créés par l'utilisateur
+        $sql = "DELETE FROM ".$this->tableName." WHERE user_id = :user_id";
+        DAO::delete($sql, ['user_id' => $userId]);
+    }
 }

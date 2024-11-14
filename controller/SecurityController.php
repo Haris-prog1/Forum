@@ -79,7 +79,7 @@ class SecurityController extends AbstractController{
 
 
             // Message flash indiquant que la deconnexion à bien été effectué
-            Session::addFlash('error', 'Vous êtes déconnecté.');
+            // Session::addFlash('error', 'Vous êtes déconnecté.');
 
 
             // Redirection
