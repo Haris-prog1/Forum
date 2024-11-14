@@ -5,4 +5,13 @@ use App\Entity;
 
 final class extends Entity {
     private $user;
+
+
+
+
+
+
+
+
+    
 }

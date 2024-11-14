@@ -13,7 +13,7 @@ class PostManager extends Manager{
    public function __construct(){
     parent::connect();
 }
-
+//fonction de recherche des posts par topic
 public function findPostsByTopic($topicId) {
 
     $sql = "SELECT * 
@@ -26,9 +26,9 @@ public function findPostsByTopic($topicId) {
         $this->className
     );
 }
-
+//fonction de mise à jour du post dans la bdd
 public function update($id, $content){
-   
+   //requête SQL
     $sql = "UPDATE post
             SET content = :content
             WHERE id_post = :id";

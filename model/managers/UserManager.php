@@ -14,7 +14,7 @@ class UserManager extends Manager{
         parent::connect();
     }
     public function findOneByMail($email) {
-        $sql = "SELECT * FROM ".$this->tableName." WHERE email = :email";
+        $sql = "SELECT * FROM ".$this->tableName." WHERE mail = :mail";
 
         // la requête renvoie un seul enregistrement --> getOneOrNullResult
         return $this->getOneOrNullResult(
@@ -26,7 +26,7 @@ class UserManager extends Manager{
      }
      public function findPassword($email){
 
-        $sql = "SELECT u.password FROM ".$this->tableName."u WHERE u.email = :email";
+        $sql = "SELECT u.password FROM ".$this->tableName."u WHERE u.mail = :mmail";
 
         return $this->getOneOrNullResult(
             DAO::select($sql, ['email' => $email], false),

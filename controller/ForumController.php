@@ -45,9 +45,11 @@ class ForumController extends AbstractController implements ControllerInterface{
         //Fonction qui permets de lister la liste des topics par catégorie
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
+        $userManager = new UserManager();
         //On instancie les deux classes, topic et category
         $category = $categoryManager->findOneById($id);
         $topics = $topicManager->findTopicsByCategory($id);
+
         
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
@@ -109,12 +111,12 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     public function addCategory() {
         if (isset($_POST['submit'])) {
-            $nameCategory = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
+            $categoryName = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
             $categoryManager = new CategoryManager();
             
-            if ($nameCategory) {
+            if ($categoryName) {
                         $data = [
-                            'nameCategory' => $nameCategory,
+                            'nameCategory' => $categoryName,
                         
                         $categoryManager->add($data),
 
@@ -139,18 +141,43 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     }
     }
+    public function addTopic(){
+        if(isset($_POST['submit'])) {
+            $topicManager = new TopicManager();
+            $categoryManager = new CategoryManager();
+
+            $title = filter_input(input_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            $content = filter_input(input_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
+
+          
+
+            $data = [
+                'title' => $title;
+                'content' => $content;
+            ]
+            $topic = $topicManager->add($data);
+            $category = $categoryManager->add($data);
+            return [
+                "view" => VIEW_DIR."forum/listTopics.php",
+                "meta_description" => "Ajouter un topic : ",
+                "data" => [
+                    "topics" => $topic,
+                   
+                ]
+        }
+    }
     public function addTopicByCategory($id){
 
         // Vérifie si le formulaire a été soumis
         if (isset($_POST['submit'])) {
+            // Création de l'instance de CategoryManager TopicManger PostManager
+            $categoryManager = new CategoryManager();
+            $topicManager = new TopicManager();
             // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres. FILTER_SANITIZE_SPECIAL_CHARS permet d'afficher la chaîne en toute sécurité dans un contexte HTML sans exécuter de code malveillant inséré par un utilisateur.
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
         $content = filter_input(INPUT_POST, 'content',FILTER_SANITIZE_SPECIAL_CHARS);
 
-         // Création de l'instance de CategoryManager TopicManger PostManager
-         $categoryManager = new CategoryManager();
-         $topicManager = new TopicManager();
-         $postManager = new PostManager();
+         
 
         //  Pour vérifier
         //  var_dump($title);
@@ -162,11 +189,11 @@ class ForumController extends AbstractController implements ControllerInterface{
 
          // récupère les catégories spécifique (par son id)
          $category = $categoryManager->findOneById($id);
-         $categoryId = $category->getId();
+        
         //  var_dump($categoryId);
  
         //  var_dump($creationDate);
-         $userId = Session::getUser()->getId();
+        
 
         // vérifier si chaque variable contient une valeur jugée positive par PHP
         if($title){
@@ -174,8 +201,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             // on construit pour chaque valeur un tableau associatif $data : 
                 $data = [
                     'title' => $title,
-                    'user_id' => $userId,
-                    'category_id' => $categoryId,
+                    
+                    'id_category' => $category,
      
                     
 
@@ -187,8 +214,8 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         $dataContent = [
             'content' => $content,
-            'user_id' => $userId,
-            'topic_id' => $topicId,
+            
+            'id_topic' => $topicId,
             
 
         ];

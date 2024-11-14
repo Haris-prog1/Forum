@@ -11,9 +11,15 @@
 // var_dump($topics);
 // var_dump($result);
 foreach($topics as $topic ){ ?>
-    <p class="uk-child-width-1-2@s uk-text-center"><a href="index.php?ctrl=forum&action=detailTopic&Id="><?= $topic->getTitle() ?></a> par <?= $topic->getUser()->getNickName()?></p>
+<?php var_dump($topic->getUser()); ?>
+    <p class="uk-child-width-1-2@s uk-text-center"><a href="index.php?ctrl=forum&action=detailTopic&Id="><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
 <?php }?>
-<p><form action="index.php?ctrl=forum&action=addTopicByCategory&Id="<?= $category->getId()?> method= "POST">
+
+
+
+
+
+<form action="index.php?ctrl=forum&action=addTopicByCategory&Id="<?= $category->getId()?> method= "POST">
 <div class="uk-margin">
             <label class="uk-form-label" for="title">Titre :</label>
             <div class="uk-form-controls">
@@ -29,6 +35,6 @@ foreach($topics as $topic ){ ?>
         <div class="uk-margin">
             <button class="uk-button uk-button-primary uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
         </div>
-    </form></p>
-</a>
+    </form>
+
 
