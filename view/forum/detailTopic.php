@@ -1,7 +1,7 @@
 <?php
     
     $topic = $result["data"]['topics']; 
-    
+    $post = $result["data"]["posts"]
 
 
 ?>
@@ -13,8 +13,8 @@
     
     
     
-    echo($topic->getTitle());
-    
+    echo($topic->getTitle().'<br>');
+    echo($post->getContent());
     $topic->getCreationDate();
     
 
