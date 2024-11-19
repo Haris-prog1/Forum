@@ -40,7 +40,7 @@
  
 <h2 class="uk-heading-line uk-text-center"><span>Supprimer le post</span></h2>
 
-<form action="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>" method="POST" class="uk-form-stacked uk-margin-large-top">
+<form action="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>" method="GET" class="uk-form-stacked uk-margin-large-top">
         
         <div class="uk-margin">
             <button class="uk-button uk-button-primary uk-width-1-1" type="submit">Supprimer</button>

@@ -296,7 +296,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $postManager = new PostManager();
        
         // Récupère le post à supprimer
-        $post = $postManager->findOneById($id);
+        $posts = $postManager->findOneById($id);
 
         // Supprime le post
         $postManager->delete($id);
