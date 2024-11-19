@@ -6,23 +6,27 @@ use App\ControllerInterface;
 use Model\Managers\UserManager;
 use Model\Managers\TopicManager;
 use Model\Managers\PostManager;
+use App\Session;
 
 class SecurityController extends AbstractController{
     // contiendra les méthodes liées à l'authentification : register, login et logout
 
     public function register () {
     $user = filter_input(INPUT_POST, "nickName", FILTER_SANITIZE_SPECIAL_CHARS);
-    $email = filter_input(INPUT_POST,"email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST,"mail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST,"password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    // var_dump($user);
+    // var_dump($email);
+    // var_dump($password);
 
     $userManager = new UserManager();
 
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    
+    if ($user){
     //Ajoute de l'utilisateur à la base de données
-    $userManager->add(["nickName" => $user, "email" =>$email, "password" => $passwordHash]);
+    $userManager->add(["nickName" => $user, "mail" =>$email, "password" => $passwordHash, "role"=>json_encode('ROLE_USER')]);
 
-        $this->redirectTo('security', "register");
+}
         return [
           // Retourne la vue register
           "view" => VIEW_DIR."security/register.php", 
@@ -36,30 +40,37 @@ class SecurityController extends AbstractController{
         $userManager = new UserManager();
         //on filtre les champs de saisie
         $mail = filter_input(INPUT_POST, "mail", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
+        // var_dump($mail);
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $user = $userManager->findOnebyMail($mail);
-        // if($email && $password){
-        // //on recherche le mot de passe associé à l'adresse mail
+        $user = $userManager->findOnebyEmail($mail);
+        // var_dump($user);
+        var_dump($mail);
+        var_dump($password);
+        
+        //     // var_dump($mail);
+        //     // var_dump($password);
+        // // // //on recherche le mot de passe associé à l'adresse mail
          
 
-            if($user){
+            // if($user){
+                var_dump($user);
 
                 //récupération du mot de passe de l'user
-                $hash = $user->getPassword();
-                //  Vérification du mots de passe
-                 if(password_verify($password, $hash)){
+                // $hash = $user->getPassword();
+        //         //  Vérification du mots de passe
+                //  if(password_verify($password, $hash)){
 
-                    //on stocke l'user en Session (setUser dans App\Session)
-                    Session::setUser($user);
+        //             //on stocke l'user en Session (setUser dans App\Session)
+                Session::setUser($user);
                  
-                    $this->redirectTo('forum', 'login');                  
-                 }else {
+        //             $this->redirectTo('forum', 'login');                  
+        //          }else {
 
-                        // Message d'erreur en cas d'erreur
-                        Session::addFlash('error', 'mot de passe ou email invalide');
+        //                 // Message d'erreur en cas d'erreur
+        //                 Session::addFlash('error', 'mot de passe ou email invalide');
 
-                        $this->redirectTo('forum');
+        //                 $this->redirectTo('forum');
 
                     return [
                 "view" => VIEW_DIR."security/login.php", 
@@ -67,9 +78,9 @@ class SecurityController extends AbstractController{
                     ];
                 
                 }  
-            }
+            // }
         // }
-    }
+    // }
     // Fonction de deconnexion
     public function logout() {
         

@@ -13,5 +13,17 @@ class CategoryManager extends Manager{
     public function __construct(){
         parent::connect();
     }
-  
+    public function findOneById($id){
+
+        $sql = "SELECT *
+                FROM ".$this->tableName." 
+                WHERE id_".$this->tableName." = :id
+                ";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['id' => $id], false), 
+            $this->className
+        );
+    }
+
 }

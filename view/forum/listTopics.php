@@ -12,20 +12,21 @@
 // var_dump($result);
 foreach($topics as $topic ){ ?>
 
-    <p class="uk-child-width-1-2@s uk-text-center"><a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
+    <p class="uk-child-width-1-2@s uk-text-center uk-text-uppercase
+    "><a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
 <?php }?>
 
 
 
 
 
-<form action="index.php?ctrl=forum&action=addTopicbyCategory&id"<?= $category->getId()?> method= "POST">
+<form action="index.php?ctrl=forum&action=addTopicByCategory&Id=<?= $category->getId()?>" method= "POST" enctype="multipart/form-data">
 <div class="uk-margin">
             <label class="uk-form-label" for="title">Titre :</label>
             <div class="uk-form-controls">
-                <input class="uk-input" type="text" id="title" name="title" placeholder="Titre du sujet" required <?= $category->getcategoryName()?>>
+                <input class="uk-input" type="title" id="title" name="title" placeholder="Titre du sujet" required <?= $category->getcategoryName()?>>
             </div>
-        </div>
+        
         <div class="uk-margin">
             <label class="uk-form-label" for="content">Résumé :</label>
             <div class="uk-form-controls">
@@ -34,7 +35,8 @@ foreach($topics as $topic ){ ?>
         </div>
         <div class="uk-margin">
             <button class="uk-button uk-button-primary uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
-        </div>
-    </form>
+            </div>
+</div>
+</form>
 
 

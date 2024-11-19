@@ -152,80 +152,90 @@ class ForumController extends AbstractController implements ControllerInterface
 
 
 
-    public function addTopicByCategory($id)
-    {
+    public function addTopicByCategory($id){
 
         // Vérifie si le formulaire a été soumis
         if (isset($_POST['submit'])) {
-            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-            // Création de l'instance de CategoryManager TopicManger PostManager
-            $categoryManager = new CategoryManager();
-            $topicManager = new TopicManager();
             // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres. FILTER_SANITIZE_SPECIAL_CHARS permet d'afficher la chaîne en toute sécurité dans un contexte HTML sans exécuter de code malveillant inséré par un utilisateur.
-            if ($title) {
-                $data = [
-                    'title' => $title,
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        $content = filter_input(INPUT_POST, 'content',FILTER_SANITIZE_SPECIAL_CHARS);
 
+         // Création de l'instance de CategoryManager TopicManger PostManager
+         $categoryManager = new CategoryManager();
+         $topicManager = new TopicManager();
+         $postManager = new PostManager();
+         
 
+        //  Pour vérifier
+        //  var_dump($title);
 
+         // récupère tous les topics d'une catégorie spécifique (par son id)
+         $topics = $topicManager->findTopicsByCategory($id);
+        
+        //  var_dump($topics);
+        
+         $topicId = $topics->findOneById($id);
+        
 
+         // récupère les catégories spécifique (par son id)
+         $category = $categoryManager->findOneById($id);
+        //  $categoryId = $category->getId();
+        //  var_dump($categoryId);
+ 
+        //  var_dump($creationDate);
+         $userId = Session::getUser();
 
-
-                ];
-                $topicManager->add($data);
-            }
-
-
-
-
-
-            // récupère tous les topics d'une catégorie spécifique (par son id)
-            $topics = $topicManager->findTopicsByCategory($id);
-            //  var_dump($topicId);
-            //  $topicId = $topic->getId();
-
-            // récupère les catégories spécifique (par son id)
-            $category = $categoryManager->findOneById($id);
-
-            //  var_dump($categoryId);
-
-            //  var_dump($creationDate);
-
-
-            // vérifier si chaque variable contient une valeur jugée positive par PHP
-
+        // vérifier si chaque variable contient une valeur jugée positive par PHP
+        if($title){
 
             // on construit pour chaque valeur un tableau associatif $data : 
+                $data = [
+                   'title' => $title,
+                   'content' => $content,
+                    
+                    
+                    
+
+                ];
+
+        //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
+        
+        $topicId = $topicManager->add($data);
+
+        $dataContent = [
+            'content' => $content,
+            'user_id' => $userId,
+            'topic_id' => $topicId,
+            
+
+        ];
+
+        //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
+        $postManager->add($dataContent);
+
+        
+         // Affiche un message de succès
+         Session::addFlash("success", "Le topic a été rajouté avec succès.");
+         // Redirige vers la liste des topics
+         $this->redirectTo('forum', 'profile.php'); 
 
 
-            //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-
-
-
-
-
-
-
-
-            // Affiche un message de succès
-            Session::addFlash("success", "Le topic a été rajouté avec succès.");
-            // Redirige vers la liste des topics
-            $this->redirectTo('forum', 'listTopics.php');
-
-
-        }
+        } else {
         // Affiche un message de d'erreur
         Session::addFlash("error", "Le topic n'a pas été rajouté ");
+        }
 
         // le controller communique avec la vue "listTopics" (view) pour lui envoyer la liste des topics (data)
         return [
-            "view" => VIEW_DIR . "forum/listTopics",
+            "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Ajouter un topic : ",
             "data" => [
                 "topics" => $topics,
-
+               
             ]
         ];
+
+        }
 
     }
 
@@ -304,6 +314,17 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $this->redirectTo('forum', 'listCategories'); 
         Session::addFlash("error", "Le post n'a pas été supprimé. ");
+    }
+    public function deleteTopic($id){
+
+        $topicManager = new TopicManager();
+        $topicManager->delete($id);
+
+        Session::addFlash('error', "Le topic a été supprimé avec succès.");
+
+        $this->redirectTo('forum', 'listCategories'); 
+      
+        Session::addFlash("error", "Le topic n'a pas été supprimé. ");
     }
 
 

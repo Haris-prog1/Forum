@@ -13,25 +13,36 @@ class UserManager extends Manager{
     public function __construct(){
         parent::connect();
     }
-    public function findOneByMail($mail) {
-        $sql = "SELECT * FROM ".$this->tableName." WHERE mail = :mail";
+    public function findOneByEmail($email){
 
-        // la requête renvoie un seul enregistrement --> getOneOrNullResult
+        $sql = "SELECT *
+                FROM ".$this->tableName." 
+                WHERE mail = :mail
+                ";
+
         return $this->getOneOrNullResult(
-            DAO::select($sql, ['mail' => $mail], false),
+            DAO::select($sql, ['mail' => $email], false), 
             $this->className
-    
         );
-    
-     }
+    }
+    // Fonction de récupération du mot de passe
      public function findPassword($mail){
-
+        // Requète sql qui va chercher le mot de passe dans la base de données
         $sql = "SELECT u.password FROM ".$this->tableName."u WHERE u.mail = :mmail";
-
+        // On retourne le résultat de la requête
         return $this->getOneOrNullResult(
             DAO::select($sql, ['mail' => $mail], false),
             $this->className
         );
+    }
+    
+
+
+    // Fonction de suppresion d'un utilisateur par l'id
+    public function deleteUser($userId) {
+        $sql = "DELETE FROM ".$this->tableName." WHERE id_user = :id";
+        DAO::delete($sql, ['id' => $userId]);
+
     }
 }
 

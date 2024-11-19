@@ -16,6 +16,7 @@ class TopicManager extends Manager{
     public function addCategory(){
         
     }
+ 
 
     // récupérer tous les topics d'une catégorie spécifique (par son id)
     public function findTopicsByCategory($id) {

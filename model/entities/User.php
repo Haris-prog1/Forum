@@ -64,9 +64,55 @@ final class User extends Entity{
 
         return $this;
     }
-    
-
-    public function __toString(){
-        return $this->nickName;
+       /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
     }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+    /**
+     * Get the value of role
+     */ 
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+    public function hasRole($role){
+
+        $result = $this->getRole()== json_encode($role);
+        
+        return $result;
+    }
+
+public function __toString() {
+    return $this->nickName;
+}
+
+
+
 }

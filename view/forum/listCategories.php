@@ -4,7 +4,7 @@
     
 ?>
 
-<h1 class="uk-text-center">Liste des catégories</h1>
+<h1 class="uk-text-center uk-text-uppercase">Liste des catégories</h1>
 
 <?php
 // Liste des catégories affichés
@@ -17,7 +17,7 @@ foreach($categories as $category ){
 
 
 <!-- Formulaire d'ajouts de catégorie -->
-<form action="index.php?ctrl=forum&action=detail"<?= $category->getId()?> method= "POST">
+<form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST"  enctype="multipart/form-data">
 <div class="uk-margin">
             <label class="uk-form-label" for="categoryName">Titre :</label>
             <div class="uk-form-controls">

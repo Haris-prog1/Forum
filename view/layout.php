@@ -27,7 +27,7 @@
                             <?php
                             if (App\Session::isAdmin()) {
                                 ?>
-                                <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
+                                
                             <?php } ?>
 
                             <?php
@@ -37,6 +37,8 @@
                                 <a href="index.php?ctrl=security&action=profile"><span
                                         class="fas fa-user"></span>&nbsp;<?= App\Session::getUser() ?></a>
                                 <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                                <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
+                                <a href="index.php?ctrl=forum&action=listUsers">Liste des utilisateurs</a>
                                 <?php
                             } else {
                                 ?>
@@ -49,12 +51,7 @@
                             ?>
 
 
-                            <form class="input" action="index.php" method="GET">
-
-                                <input type="text" name="search" placeholder="Taper quelque chose" />
-
-                                <button type="submit">Rechercher</button>
-                            </form>
+                           
                         </div>
                     </div>
                 </nav>

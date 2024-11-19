@@ -13,6 +13,7 @@ class PostManager extends Manager{
    public function __construct(){
     parent::connect();
 }
+
 //fonction de recherche des posts par topic
 public function findPostsByTopic($id) {
 
