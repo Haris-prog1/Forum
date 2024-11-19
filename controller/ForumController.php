@@ -174,7 +174,7 @@ class ForumController extends AbstractController implements ControllerInterface
         
         //  var_dump($topics);
         
-         $topicId = $topics->findOneById($id);
+         
         
 
          // récupère les catégories spécifique (par son id)
@@ -190,8 +190,11 @@ class ForumController extends AbstractController implements ControllerInterface
 
             // on construit pour chaque valeur un tableau associatif $data : 
                 $data = [
+                    'id_topic' => $topic,
                    'title' => $title,
-                   'content' => $content,
+                   'creationDate' => $creationDate,
+                   'category_id' => $categoryId,
+                   'user' => $userId
                     
                     
                     
@@ -199,13 +202,13 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
 
         //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-        
-        $topicId = $topicManager->add($data);
+        $category = $categoryManager->add($data);
+        $topic = $topicManager->add($data);
 
         $dataContent = [
             'content' => $content,
-            'user_id' => $userId,
-            'topic_id' => $topicId,
+            
+            
             
 
         ];
@@ -217,7 +220,7 @@ class ForumController extends AbstractController implements ControllerInterface
          // Affiche un message de succès
          Session::addFlash("success", "Le topic a été rajouté avec succès.");
          // Redirige vers la liste des topics
-         $this->redirectTo('forum', 'profile.php'); 
+         $this->redirectTo('forum', 'listTopics.php'); 
 
 
         } else {
