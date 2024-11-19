@@ -13,7 +13,7 @@
     
     
     ?>
-    <p class="uk-heading-line uk-text-center uk-text-uppercase">Résumé du post <br><br>
+    <p class="uk-heading-line uk-text-center uk-text-uppercase uk-text-success">Résumé du post <br><br>
         <?php echo($topic->getTitle().'<br>');
     echo($post->getContent());?></p>
     <?php
@@ -24,7 +24,7 @@
 ?>
 
  
-<h3 class="uk-heading-line uk-text-center"><span>Modifier un post</span></h3>
+<h3 class="uk-heading-line uk-text-center uk-text-success"><span>Modifier un post</span></h3>
 
 <form action="index.php?ctrl=forum&action=updatePost&id=<?=$post->getId()?>" method="POST" class="uk-form-stacked uk-margin-large-top">
         <div class="uk-margin">

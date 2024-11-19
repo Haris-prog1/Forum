@@ -4,13 +4,13 @@
     
 ?>
 
-<h1 class="uk-text-center uk-text-uppercase">Liste des catégories</h1>
+<h1 class="uk-text-center uk-text-uppercase uk-text-success">Liste des catégories</h1>
 
 <?php
 // Liste des catégories affichés
 foreach($categories as $category ){ 
     ?>
-    <p class="uk-child-width-1-2@s uk-text-center"><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getcategoryName() ?></a></p>
+    <p class="uk-child-width-1-2@s uk-text-center uk-text-success"><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getcategoryName() ?></a></p>
 <?php  } ?>
 
 
@@ -25,7 +25,7 @@ foreach($categories as $category ){
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-primary uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
+            <button class="uk-button uk-button-success uk-text-success uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
         </div>
     </form>
 

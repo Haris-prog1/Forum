@@ -4,7 +4,7 @@
     
 ?>
 
-<h1 class="uk-child-width-1-2@s uk-text-center">Liste des topics de la catégorie <?=$category ?></h1>
+<h1 class="uk-child-width-1-2@s uk-text-center uk-text-danger">Liste des topics de la catégorie <?=$category ?></h1>
 
 
 <?php
@@ -12,8 +12,8 @@
 // var_dump($result);
 foreach($topics as $topic ){ ?>
 
-    <p class="uk-child-width-1-2@s uk-text-center uk-text-uppercase
-    "><a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
+    <p class="uk-child-width-1-2@s uk-text-center uk-text-uppercase uk-text-danger">
+        <a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
 <?php }?>
 
 
@@ -34,7 +34,7 @@ foreach($topics as $topic ){ ?>
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-primary uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
+            <button class="uk-button uk-button-danger uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
             </div>
 </div>
 </form>
