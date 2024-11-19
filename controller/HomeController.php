@@ -13,7 +13,12 @@ class HomeController extends AbstractController implements ControllerInterface {
             "meta_description" => "Page d'accueil du forum"
         ];
     }
-
+    public function listCategorie(){
+        return [
+            "view" => VIEW_DIR."listCategories.php",
+            "meta_description" => "Liste des catégories"
+        ];
+    }
         
     public function users(){
         $this->restrictTo("ROLE_USER");

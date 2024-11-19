@@ -13,12 +13,15 @@ class UserManager extends Manager{
     public function __construct(){
         parent::connect();
     }
+
+
+    
     public function findOneByMail($email) {
-        $sql = "SELECT * FROM ".$this->tableName." WHERE email = :email";
+        $sql = "SELECT * FROM ".$this->tableName." WHERE mail = :mail";
 
         // la requête renvoie un seul enregistrement --> getOneOrNullResult
         return $this->getOneOrNullResult(
-            DAO::select($sql, ['email' => $email], false),
+            DAO::select($sql, ['mail' => $email], false),
             $this->className
     
         );
@@ -26,10 +29,10 @@ class UserManager extends Manager{
      }
      public function findPassword($email){
 
-        $sql = "SELECT u.password FROM ".$this->tableName."u WHERE u.email = :email";
+        $sql = "SELECT u.password FROM ".$this->tableName."u WHERE u.mail = :mail";
 
         return $this->getOneOrNullResult(
-            DAO::select($sql, ['email' => $email], false),
+            DAO::select($sql, ['mail' => $email], false),
             $this->className
         );
     }
