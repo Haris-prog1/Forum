@@ -20,7 +20,7 @@ class SecurityController extends AbstractController{
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     
     //Ajoute de l'utilisateur à la base de données
-    $userManager->add(["nickName" => $user, "mail" =>$email, "password" => $passwordHash]);
+    $userManager->add(["nickName" => $user, "email" =>$email, "password" => $passwordHash]);
 
         $this->redirectTo('security', "register");
         return [
@@ -34,20 +34,16 @@ class SecurityController extends AbstractController{
         //fonction de login
      public function login () {
         $userManager = new UserManager();
-        
         //on filtre les champs de saisie
         $mail = filter_input(INPUT_POST, "mail", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
-        
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        
+
         $user = $userManager->findOnebyMail($mail);
-        var_dump($userManager);
         // if($email && $password){
         // //on recherche le mot de passe associé à l'adresse mail
          
 
             if($user){
-                
 
                 //récupération du mot de passe de l'user
                 $hash = $user->getPassword();
