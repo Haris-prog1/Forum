@@ -15,7 +15,7 @@ $post = $result['data']['post'];
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-danger uk-width-1-1" type="submit">Modifier</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">Modifier</button>
         </div>
     </form>
 </div>

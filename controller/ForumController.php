@@ -77,7 +77,20 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
+public function profile(){
+    $userManager = new UserManager();
+    $users = $userManager->findOneByEmail($id);
+    
 
+
+    return[
+        "view" => VIEW_DIR. "forum/profile.php",
+        "meta_description" => "Profile : ",
+        "data" => [
+            "user" => $users
+        ]
+        ];
+}
 
 
 // 
@@ -150,6 +163,26 @@ class ForumController extends AbstractController implements ControllerInterface
     }
 
 
+    public function addPost($idtopic){
+        $this->restrictTo("ROLE_USER");
+       
+        if(!empty($_POST)){
+
+            $post = filter_input(INPUT_POST, "post", FILTER_UNSAFE_RAW);
+
+            if($post){
+               
+                $this->newPost($post, $idtopic);
+                Session::addFlash("success", "Nouveau message ajouté !");
+                $this->redirectTo("forum", "viewTopic", $idtopic);
+            }
+            else{
+                Session::addFlash("error", "Un problème est survenu, veuillez réessayer.");
+            }
+           
+        }
+        $this->redirectTo("forum", "viewTopic", $idtopic);
+    }
 
 
     public function addTopicByCategory($id){
@@ -172,29 +205,25 @@ class ForumController extends AbstractController implements ControllerInterface
          // récupère tous les topics d'une catégorie spécifique (par son id)
          $topics = $topicManager->findTopicsByCategory($id);
         
-        //  var_dump($topics);
+   
         
          
         
 
-         // récupère les catégories spécifique (par son id)
+       
          $category = $categoryManager->findOneById($id);
-        //  $categoryId = $category->getId();
-        //  var_dump($categoryId);
- 
-        //  var_dump($creationDate);
+       
          $userId = Session::getUser();
 
-        // vérifier si chaque variable contient une valeur jugée positive par PHP
+        
         if($title){
 
-            // on construit pour chaque valeur un tableau associatif $data : 
+           
                 $data = [
-                    'id_topic' => $topic,
-                   'title' => $title,
-                   'creationDate' => $creationDate,
-                   'category_id' => $categoryId,
-                   'user' => $userId
+                    
+                   'title' => $topic,
+                   'content' => $post
+                   
                     
                     
                     
@@ -202,12 +231,14 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
 
         //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-        $category = $categoryManager->add($data);
+        $post = $postManager->add($data);
+        
         $topic = $topicManager->add($data);
 
         $dataContent = [
             'content' => $content,
-            
+            'title' => $title
+
             
             
 
@@ -231,9 +262,10 @@ class ForumController extends AbstractController implements ControllerInterface
         // le controller communique avec la vue "listTopics" (view) pour lui envoyer la liste des topics (data)
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
-            "meta_description" => "Ajouter un topic : ",
+            "meta_description" => "Ajoute d'un topic : ",
             "data" => [
                 "topics" => $topics,
+                "content" => $content
                
             ]
         ];
@@ -241,6 +273,7 @@ class ForumController extends AbstractController implements ControllerInterface
         }
 
     }
+
 
     public function detailCategory()
     {

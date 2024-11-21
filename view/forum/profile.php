@@ -1,9 +1,15 @@
 <?php
-    // $topics = $result['data']['topics'];
-    // $posts = $result['data']['posts'];
+  $users = $result["data"]["user"];
 ?>
 
 
+<?php
 
 
-<h3>Test</h3>
+
+    $users->getNickName();
+
+
+
+
+?>

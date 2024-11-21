@@ -3,19 +3,25 @@
     
     
 ?>
-
-<h1 class="uk-text-center uk-text-uppercase uk-text-success">Liste des catégories</h1>
+<div>
+    
+<h1 class= "uk-heading-line uk-text-center">Liste des catégories</h1>
 
 <?php
+if (!empty($categories)) {
 // Liste des catégories affichés
 foreach($categories as $category ){ 
     ?>
-    <p class="uk-child-width-1-2@s uk-text-center uk-text-success"><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getcategoryName() ?></a></p>
-<?php  } ?>
+    <p class="uk-child-width-1-2@s uk-text-center uk-text-secondary uk-flex-bottom"><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getcategoryName() ?></a></p>
+<?php  }}
+else{ ?>
+    <p class="uk-text-center uk-text-uppercase uk-text-secondary">Il n'y a aucun topic pour le moment.</p>
+    
+<?php } ?>
 
 
 
-
+</div>
 <!-- Formulaire d'ajouts de catégorie -->
 <form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST"  enctype="multipart/form-data">
 <div class="uk-margin">
@@ -25,7 +31,7 @@ foreach($categories as $category ){
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-success uk-text-success uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
+            <button class="uk-button uk-button-success uk-text-secondary uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
         </div>
     </form>
 

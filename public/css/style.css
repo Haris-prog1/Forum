@@ -2,7 +2,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
+body{
+    background-color:rgb(17, 17, 17);
+    margin: 0; padding: 0; /* Enlève les marges par défaut */
+   
+  
+    height: 100vh; /* S'assure que le body prend toute la hauteur de la fenêtre */
+    
+    background-image: url('../img/background.jpg'); /* Définir l'image en background */
+    background-size: cover; /* L'image couvre toute la page */
+   
+    background-repeat: no-repeat;
+    
+}
+h1{
+    color: rgb(255, 255, 255);
+    align-items: center;
+}
+
 
 .nav-right{
     display: flex;

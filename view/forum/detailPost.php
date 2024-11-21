@@ -9,4 +9,12 @@ foreach($topics as $topic){
    <?=$post->getContent()?>
     <?php
 }
+
+$posts = ["data"]['posts']
+
 ?>
+
+
+
+
+

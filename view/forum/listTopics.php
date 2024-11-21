@@ -3,18 +3,26 @@
     $topics = $result["data"]['topics']; 
     
 ?>
+<div >
 
-<h1 class="uk-child-width-1-2@s uk-text-center uk-text-danger">Liste des topics de la catégorie <?=$category ?></h1>
+<h1 class="uk-child-width-1-2@s uk-text-center uk-text-secondary">Liste des topics de la catégorie <?=$category ?></h1>
 
 
 <?php
-// var_dump($topics);
-// var_dump($result);
-foreach($topics as $topic ){ ?>
+if (!empty($topics)) { // Vérifie si $topics n'est pas vide
 
-    <p class="uk-child-width-1-2@s uk-text-center uk-text-uppercase uk-text-danger">
-        <a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()?></p>
-<?php }?>
+    //On boucle tous les topics et on affiche
+   foreach ($topics as $topic) { ?>
+<p class="uk-child-width-1-2@s uk-text-center uk-text-uppercase uk-text-secondary">
+<a href="index.php?ctrl=forum&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic->getTitle() ?> par <?= $topic->getUser();?></a>
+</p>
+<?php
+   } //Si il y a pas de topic, on affiche
+} else { ?>
+<p class="uk-text-center uk-text-uppercase uk-text-secondary">Il n'y a aucun topic pour le moment.</p>
+<?php
+}
+?>
 
 
 
@@ -34,7 +42,7 @@ foreach($topics as $topic ){ ?>
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-danger uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
             </div>
 </div>
 </form>

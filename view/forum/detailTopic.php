@@ -13,18 +13,30 @@
     
     
     ?>
-    <p class="uk-heading-line uk-text-center uk-text-uppercase uk-text-success">Résumé du post <br><br>
+    <p class="uk-heading-line uk-text-left uk-text-uppercase uk-text-muted uk-text-center">Résumé du post <br><br>
+
+
+
+    
         <?php echo($topic->getTitle().'<br>');
     echo($post->getContent());?></p>
+
+
     <?php
     
     
     
 
 ?>
+<form action="index.php?ctrl=forum&action=addPost" method="POST">
+    <label for="content">Content</label>
+    <input type="text" id="content" name="content" required>
+    <button id="submit"type=submit name="submit">Ajouter un post</button>
+</form>
 
- 
-<h3 class="uk-heading-line uk-text-center uk-text-success"><span>Modifier un post</span></h3>
+<?php
+if (App\Session::isAdmin()) { ?>
+<h3 class="uk-heading-line uk-text-center uk-text-secondary"><span>Modifier un post</span></h3>
 
 <form action="index.php?ctrl=forum&action=updatePost&id=<?=$post->getId()?>" method="POST" class="uk-form-stacked uk-margin-large-top">
         <div class="uk-margin">
@@ -34,7 +46,7 @@
             </div>
         </div>
         <div class="uk-margin">
-            <button class="uk-button uk-button-primary uk-width-1-1" type="submit">Modifier</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">Modifier</button>
         </div>
     </form>
 </div>
@@ -45,11 +57,11 @@
     
         
         <div class="uk-margin">
-            <button class="uk-button uk-button-primary uk-width-1-1" type="submit">Supprimer le post</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">Supprimer le post</button>
         </div>
     </div>
 </form>
-
+<?php }?>
 
 
 

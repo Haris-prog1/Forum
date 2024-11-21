@@ -1,8 +1,29 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<!DOCTYPE html>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/style.css">
 
-<p>
-    <a href="index.php?ctrl=security&action=login">Se connecter</a>
-    <a href="index.php?ctrl=security&action=register">S'inscrire</a>
-</p>
+    <title></title>
+</head>
+<body>
+    <div class="background"></div>
+    <h1 class = "uk-heading-line uk-text-center">BIENVENUE SUR FORUM</h1>
+    <p>
+       <!-- <p class= "uk-text-center"> <a href="index.php?ctrl=security&action=login">Se connecter</a></p>
+       <p class= "uk-text-center"> <a href="index.php?ctrl=security&action=register">S'inscrire</a></p> -->
+    </p>
+
+
+
+    
+    
+ 
+    
+    
+    
+
+
+
+

@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
         integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>./css/style.css">
     <title>FORUM</title>
 </head>
 
 <body>
+    
     <div id="wrapper">
         <div id="mainpage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
@@ -22,11 +23,12 @@
             <header>
                 <nav>
                     <div id="nav-left">
-                        <div class="nav-right">
+                        <div class="nav-right uk-icon=home uk-text-danger">
                             <a href="index.php?ctrl=home&action=index">Accueil</a>
                             <?php
-                            if (App\Session::isAdmin()) {
-                                ?>
+                            if (App\Session::isAdmin()) { ?>
+                                <a href="index.php?ctrl=forum&action=listUsers">Liste des utilisateurs</a>
+                              
                                 
                             <?php } ?>
 
@@ -38,14 +40,14 @@
                                         class="fas fa-user"></span>&nbsp;<?= App\Session::getUser() ?></a>
                                 <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
-                                <a href="index.php?ctrl=forum&action=listUsers">Liste des utilisateurs</a>
+                                
                                 <?php
                             } else {
                                 ?>
                                 <a href="index.php?ctrl=security&action=login">Connexion</a>
                                 <a href="index.php?ctrl=security&action=register">Inscription</a>
                                 <a href="index.php?ctrl=forum&action=listCategories">Liste des catégories</a>
-                                <a href="index.php?ctrl=forum&action=listUsers">Liste des utilisateurs</a>
+                                
                                 <?php
                             }
                             ?>
@@ -53,23 +55,24 @@
 
                            
                         </div>
-                    </div>
+                    </div>  
+                        </div>
+                        </div>
                 </nav>
-
+                
             </header>
+        
 
             <main id="forum">
-                <div>
-                    <img src="parallax.png" alt="Image en parallax">
-                </div>
                 <?= $page ?>
+                <div>
+                        </div>
+            
+
             </main>
-        </div>
-        <footer>
-            <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions
-                    légales</a></p>
-        </footer>
-    </div>
+       
+       
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
         </script>
@@ -105,6 +108,13 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   
 </body>
 
 </html>
+<footer class="uk-flex uk-flex-bottom">
+        <div class="uk-flex uk-flex-bottom">
+            <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions
+                    légales</a></p>
+                    </div>
+        </footer>

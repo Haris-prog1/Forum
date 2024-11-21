@@ -7,7 +7,7 @@ $users = $result["data"]["user"];
 <?php 
 foreach ($users as $user){ ?>
 
-<p class="uk-heading-line uk-text-center uk-text-secondary"><?=$user->getNickName()?> </p>
+<p class="uk-child-width-1-2@s uk-text-center uk-text-secondary"><a href="index.php?ctrl=forum&action=profile"><?=$user->getNickName()?></a> </p>
 <?php } ?>
 </div>
 

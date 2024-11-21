@@ -7,9 +7,11 @@
 </head>
 <body>
     <form action="index.php?ctrl=security&action=register" method="POST" class="uk-form-stacked uk-margin-large-top ">
-        <div class="uk-margin uk-form-controls">
+    <div class="uk-margin uk-form-controls ">
+        
             <input id="nickName" name="nickName" type="text" required>Utilisateur
-        </div>
+    </div>
+        
         <div class="uk-margin uk-form-controls">
             <input id="mail" name="mail" type="mail" required>Adresse Email
         </div>

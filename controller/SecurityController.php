@@ -24,7 +24,7 @@ class SecurityController extends AbstractController{
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     if ($user){
     //Ajoute de l'utilisateur à la base de données
-    $userManager->add(["nickName" => $user, "mail" =>$email, "password" => $passwordHash, "role"=>json_encode('ROLE_USER')]);
+    $userManager->add(["nickName" => $user, "mail" =>$email, "password" => $passwordHash,]);
 
 }
         return [
@@ -40,26 +40,15 @@ class SecurityController extends AbstractController{
         $userManager = new UserManager();
         //on filtre les champs de saisie
         $mail = filter_input(INPUT_POST, "mail", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
-        // var_dump($mail);
+        
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $user = $userManager->findOnebyEmail($mail);
-        // var_dump($user);
-        var_dump($mail);
-        var_dump($password);
+      
         
-        //     // var_dump($mail);
-        //     // var_dump($password);
-        // // // //on recherche le mot de passe associé à l'adresse mail
          
 
-            // if($user){
-                var_dump($user);
-
-                //récupération du mot de passe de l'user
-                // $hash = $user->getPassword();
-        //         //  Vérification du mots de passe
-                //  if(password_verify($password, $hash)){
+    
 
         //             //on stocke l'user en Session (setUser dans App\Session)
                 Session::setUser($user);
