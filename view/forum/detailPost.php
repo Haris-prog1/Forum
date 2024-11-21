@@ -10,7 +10,7 @@ foreach($topics as $topic){
     <?php
 }
 
-$posts = ["data"]['posts']
+
 
 ?>
 
