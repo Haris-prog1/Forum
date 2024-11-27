@@ -58,20 +58,30 @@ class ForumController extends AbstractController implements ControllerInterface
     // Détail d'un topic d'une catégorie
     public function detailTopic($id)
     {
+        //On instancie Topic, Post, Category manager
         $topicManager = new TopicManager();
         $postManager = new PostManager();
-        $categoryManager = new CategoryManager();
-        $posts = $postManager->findOneById($id);
-        $category = $categoryManager->findOneById($id);
+      
+
+
+        //On récupère les id topic et post
         $topic = $topicManager->findOneById($id);
+        
+        $posts = $postManager->findPostsByTopic($id);
+        
+        
+        
+       
+    
 
 
         return [
             "view" => VIEW_DIR . "forum/detailTopic.php",
-            "meta_description" => "Liste des Topics par catégorie : ",
+            "meta_description" => "Résumé topic : ",
             "data" => [
-                "topics" => $topic,
-                "category" => $category,
+                "topic" => $topic,
+              
+
                 "posts" => $posts
 
             ]
@@ -163,108 +173,134 @@ public function profile(){
     }
 
 
-    public function addPost($idtopic){
-        $this->restrictTo("ROLE_USER");
+    public function addPost($id){
+        // $this->restrictTo("ROLE_USER");
        
         if(!empty($_POST)){
+         
+            
+            $content = filter_input(INPUT_POST, "content", FILTER_UNSAFE_RAW);
+            if($content){
+                
+                $postManager = new PostManager();
+                $topicManager = new TopicManager();
+                $topic = $topicManager->findOneById($id);
 
-            $post = filter_input(INPUT_POST, "post", FILTER_UNSAFE_RAW);
+                
+                $data = [
+                    'content' => $content,
+                    'topic_id' => $id,
+                    
+                ];
+                // Ajout de la data en base de données
+                $postManager->add($data);
 
-            if($post){
-               
-                $this->newPost($post, $idtopic);
-                Session::addFlash("success", "Nouveau message ajouté !");
-                $this->redirectTo("forum", "viewTopic", $idtopic);
+
             }
-            else{
-                Session::addFlash("error", "Un problème est survenu, veuillez réessayer.");
+
+               
+                // $this->newPost($content, $id);
+                Session::addFlash("success", "Nouveau message ajouté !");
+                $this->redirectTo("forum", "detailPost", $id);
+            // }
+            // else{
+            //     Session::addFlash("error", "Un problème est survenu, veuillez réessayer.");
             }
            
-        }
-        $this->redirectTo("forum", "viewTopic", $idtopic);
+        // }
+        $this->redirectTo("forum", "detailPost", $id);
     }
 
 
+
+
+
     public function addTopicByCategory($id){
-
+       
         // Vérifie si le formulaire a été soumis
-        if (isset($_POST['submit'])) {
+        
+        if (isset($_POST['submit'])) 
+         {
+           
             // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres. FILTER_SANITIZE_SPECIAL_CHARS permet d'afficher la chaîne en toute sécurité dans un contexte HTML sans exécuter de code malveillant inséré par un utilisateur.
-        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-        $content = filter_input(INPUT_POST, 'content',FILTER_SANITIZE_SPECIAL_CHARS);
 
-         // Création de l'instance de CategoryManager TopicManger PostManager
+        
+       
+        $title = filter_input(INPUT_POST, 'title',FILTER_SANITIZE_SPECIAL_CHARS);
+        $content = filter_input(INPUT_POST, 'content',FILTER_SANITIZE_SPECIAL_CHARS);
+        
+         // Création de l'instance de CategoryManager TopicManager PostManager
          $categoryManager = new CategoryManager();
          $topicManager = new TopicManager();
          $postManager = new PostManager();
          
 
-        //  Pour vérifier
-        //  var_dump($title);
+        
 
          // récupère tous les topics d'une catégorie spécifique (par son id)
-         $topics = $topicManager->findTopicsByCategory($id);
-        
-   
-        
          
-        
+         $topics = $topicManager->findTopicsByCategory($id);
+         
 
-       
-         $category = $categoryManager->findOneById($id);
-       
-         $userId = Session::getUser();
-
+    
+         //Récupération de l'user en session si il y en à un
         
+         $userId = Session::getUser()->getId();
+
+          
+
+
+        //  Vérification si il y a des données dans la varaible $content
         if($title){
 
-           
+            // Création d'une variable data sous forme de tableau, et attribution des différentes données
                 $data = [
                     
-                   'title' => $topic,
-                   'content' => $post
+                   'title' => $title,
+                //    'category_id' => $postId
+                    
                    
-                    
-                    
-                    
-
                 ];
 
-        //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-        $post = $postManager->add($data);
-        
-        $topic = $topicManager->add($data);
+       
 
+        // On ajout les données du tableau via la fonction add et comme pour valeur $data
+       
+        $topic = $topicManager->add($data);
         $dataContent = [
             'content' => $content,
-            'title' => $title
-
             
             
 
         ];
+        $post = $postManager->add($dataContent);
 
-        //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-        $postManager->add($dataContent);
 
-        
-         // Affiche un message de succès
+        // var_dump($dataContent);
+        // var_dump($data);
+        // die;
+
+        // Affiche un message de succès si le processus est réussi
          Session::addFlash("success", "Le topic a été rajouté avec succès.");
-         // Redirige vers la liste des topics
-         $this->redirectTo('forum', 'listTopics.php'); 
+
+         // Redirige vers le detail des Posts
+
+         $this->redirectTo('forum', 'detailPost.php'); 
 
 
+
+        //  Sinon....
         } else {
-        // Affiche un message de d'erreur
+        // Affiche un message de d'erreur en cas d'échec d'ajout.
         Session::addFlash("error", "Le topic n'a pas été rajouté ");
         }
 
-        // le controller communique avec la vue "listTopics" (view) pour lui envoyer la liste des topics (data)
+       //Communication avec le controlleur pour renvoyer la vue de la liste des topics et des différentes données à affichés.
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Ajoute d'un topic : ",
             "data" => [
-                "topics" => $topics,
+                "topic" => $topics,
                 "content" => $content
                
             ]
@@ -274,21 +310,10 @@ public function profile(){
 
     }
 
+    
 
-    public function detailCategory()
-    {
-        $categoryManager = new CategoryManager();
 
-        $category = $categoryManager->findOneById($id);
-
-        return [
-            "view" => VIEW_DIR . "forum/detailCategory.php",
-            "meta_description" => "Detail topic de la catégorie :",
-            "data" => [
-                "category" => $category,
-            ]
-        ];
-    }
+  
 
 
     public function updatePostForm($postId){

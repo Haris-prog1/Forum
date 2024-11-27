@@ -28,7 +28,7 @@ if (!empty($topics)) { // Vérifie si $topics n'est pas vide
 
 
 
-<form action="index.php?ctrl=forum&action=addTopicByCategory&Id=<?= $category->getId()?>" method= "POST" enctype="multipart/form-data">
+<form action="index.php?ctrl=forum&action=addTopicByCategory&Id=<?= $category->getId()?>" method= "POST">
 <div class="uk-margin">
             <label class="uk-form-label" for="title">Titre :</label>
             <div class="uk-form-controls">

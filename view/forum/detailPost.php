@@ -6,7 +6,8 @@ $posts = $result['data']['posts'];
 <?php
 foreach($topics as $topic){ 
    ?>
-   <?=$post->getContent()?>
+   
+   <?=$post->getContent()?> 
     <?php
 }
 

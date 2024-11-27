@@ -4,9 +4,6 @@
     
 ?>
 <div>
-    
-<h1 class= "uk-heading-line uk-text-center">Liste des catégories</h1>
-
 <?php
 if (!empty($categories)) {
 // Liste des catégories affichés
@@ -19,11 +16,9 @@ else{ ?>
     
 <?php } ?>
 
-
-
-</div>
+<h1 class= "uk-heading-line uk-text-center">Liste des catégories</h1>
 <!-- Formulaire d'ajouts de catégorie -->
-<form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST"  enctype="multipart/form-data">
+<form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST">
 <div class="uk-margin">
             <label class="uk-form-label" for="categoryName">Titre :</label>
             <div class="uk-form-controls">
@@ -34,5 +29,8 @@ else{ ?>
             <button class="uk-button uk-button-success uk-text-secondary uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
         </div>
     </form>
+
+
+
 
   

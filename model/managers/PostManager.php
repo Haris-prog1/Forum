@@ -15,18 +15,23 @@ class PostManager extends Manager{
 }
 
 //fonction de recherche des posts par topic
-public function findPostsByTopic($id) {
+public function findPostsByTopic($topicId) {
 
     $sql = "SELECT * 
             FROM ".$this->tableName." t 
-            WHERE t.id_topic = :topicId";
+            WHERE t.topic_id = :topicId";
    
     // la requête renvoie plusieurs enregistrements --> getMultipleResults
     return  $this->getMultipleResults(
-        DAO::select($sql, ['idTopic' => $id]), 
+        DAO::select($sql, ['topicId' => $topicId]), 
         $this->className
     );
 }
+
+
+
+
+
 //fonction de mise à jour du post dans la bdd
 public function update($id, $content){
    //requête SQL
