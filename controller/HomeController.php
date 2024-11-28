@@ -10,9 +10,11 @@ class HomeController extends AbstractController implements ControllerInterface {
 
     public function index(){
         $postManager = new PostManager();
-
+        var_dump($id);
+        die;
         $posts = $postManager->findLastFivePosts($id);
 
+      
         $topicManager = new TopicManager();
 
         $topics = $topicManager->findLastFiveTopics($id);
