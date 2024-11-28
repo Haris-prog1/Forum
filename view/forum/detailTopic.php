@@ -39,7 +39,8 @@
 
     
     
-
+<?php
+if (App\Session::isAdmin()) { ?>
 <form action="index.php?ctrl=forum&action=addPost&id=<?=$topic->getId()?>" method="POST">
     <div class="uk-margin">
         <label class="uk-form-label" for="content">Résumé :</label>
@@ -54,8 +55,21 @@
 
 </form>
 
+<?php } elseif(App\Session::getUser()){ ?>
+    <form action="index.php?ctrl=forum&action=addPost&id=<?=$topic->getId()?>" method="POST">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="content">Résumé :</label>
+        <div class="uk-form-controls">
+            <input class="uk-textarea" id="content" name="content" rows="5" placeholder="Résumé du sujet" required>
+        </div>
+    </div>
 
+    <div class="uk-margin">
+        <button class="uk-button uk-button-danger uk-width-1-1" name="submit" type="submit">Publier le post</button>
+    </div>
 
+</form>
+<?php } ?>
 
 
 

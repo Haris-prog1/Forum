@@ -27,8 +27,10 @@ if (!empty($topics)) { // Vérifie si $topics n'est pas vide
 
 
 
-
+<?php if (App\Session::isAdmin()) { ?>
+ 
 <form action="index.php?ctrl=forum&action=addTopicByCategory&id=<?= $category->getId()?>" method= "POST">
+    
 <div class="uk-margin">
             <label class="uk-form-label" for="title">Titre :</label>
             <div class="uk-form-controls">
@@ -46,5 +48,25 @@ if (!empty($topics)) { // Vérifie si $topics n'est pas vide
             </div>
 </div>
 </form>
+<?php } 
+elseif (App\Session::getUser()){ ?>
+<form action="index.php?ctrl=forum&action=addTopicByCategory&id=<?= $category->getId()?>" method= "POST">
+    
+    <div class="uk-margin">
+                <label class="uk-form-label" for="title">Titre :</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="title" id="title" name="title" placeholder="Titre du sujet" required <?= $category->getcategoryName()?>>
+                </div>
+            
+            <div class="uk-margin">
+                <label class="uk-form-label" for="content">Résumé :</label>
+                <div class="uk-form-controls">
+                    <textarea class="uk-textarea" id="content" name="content" rows="5" placeholder="Résumé du sujet" required></textarea>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-secondary uk-width-1-1" name="submit" type="submit">Ajouter un nouveau topic</button>
+                </div>
+<?php }; ?>
 
 

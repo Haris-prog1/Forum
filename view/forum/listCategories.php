@@ -18,6 +18,20 @@ else{ ?>
 <?php } ?>
 
 <!-- Formulaire d'ajouts de catégorie -->
+<?php if (App\Session::isAdmin()) { ?>
+<form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST">
+<div class="uk-margin">
+            <label class="uk-form-label" for="categoryName">Titre :</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" type="text" id="categoryName" name="categoryName" placeholder="Titre de la catégorie" required>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <button class="uk-button uk-button-success uk-text-secondary uk-width-1-1" name="submit" type="submit">Ajouter une nouvelle catégorie</button>
+        </div>
+    </form>
+<?php }
+elseif (App\Session::getUser()){ ?>
 <form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST">
 <div class="uk-margin">
             <label class="uk-form-label" for="categoryName">Titre :</label>
@@ -30,6 +44,10 @@ else{ ?>
         </div>
     </form>
 
+
+
+
+<?php }; ?>
 
 
 

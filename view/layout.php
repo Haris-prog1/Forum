@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    
+
     <div id="wrapper">
         <div id="mainpage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
@@ -22,6 +22,7 @@
             <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
             <header>
                 <nav>
+
                     <div id="nav-left">
                         <div class="nav-right uk-icon=home uk-text-danger">
                             <a href="index.php?ctrl=home&action=index">Accueil</a>
