@@ -5,7 +5,7 @@
 ?>
 <div >
 
-<h1 class="uk-child-width-1-2@s uk-text-center uk-text-secondary">Liste des topics de la catégorie <?=$category ?></h1>
+<h1 class="uk-child-width-1-2@s uk-text-center uk-text-warning">Liste des topics de la catégorie <?=$category ?></h1>
 
 
 <?php
@@ -19,7 +19,7 @@ if (!empty($topics)) { // Vérifie si $topics n'est pas vide
 <?php
    } //Si il y a pas de topic, on affiche
 } else { ?>
-<p class="uk-text-center uk-text-uppercase uk-text-secondary">Il n'y a aucun topic pour le moment.</p>
+<p class="uk-text-center uk-text-uppercase uk-text-warning">Il n'y a aucun topic pour le moment.</p>
 <?php
 }
 ?>

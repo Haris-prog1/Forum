@@ -6,7 +6,7 @@
     <h1>Inscription</h1>
 </head>
 <body>
-    <form action="index.php?ctrl=security&action=register" method="POST" class="uk-form-stacked uk-margin-large-top ">
+    <form action="index.php?ctrl=security&action=register" method="POST" class="uk-form-stacked ">
     <div class="uk-margin uk-form-controls ">
         
             <input id="nickName" name="nickName" type="text" required>Utilisateur

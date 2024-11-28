@@ -8,7 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    
         integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/slate/bootstrap.min.css">
+
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>./css/style.css">
     <title>FORUM</title>
 </head>
@@ -113,9 +117,3 @@
 </body>
 
 </html>
-<footer class="uk-flex uk-flex-bottom">
-        <div class="uk-flex uk-flex-bottom">
-            <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions
-                    légales</a></p>
-                    </div>
-        </footer>

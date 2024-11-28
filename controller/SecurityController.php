@@ -108,7 +108,7 @@ class SecurityController extends AbstractController{
             "meta_description" => "Utilisateur supprimé et posts anonymisés",
             "data" => [
             
-                "users" => $users
+                "users" => $users,
             ]
         ];
             } else {

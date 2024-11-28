@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://localhost/forum/index.php?ctrl=security&action=login -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connexion">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./FORUM_files/uikit.min.css">
+    <link rel="stylesheet" href="./FORUM_files/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous">
+        <link rel="stylesheet" href="./FORUM_files/bootstrap.css">
+        <link rel="stylesheet" href="./FORUM_files/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./FORUM_files/style.css">
+    <title>FORUM</title>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div id="mainpage">
+            <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
+            <h3 class="message" style="color: red"></h3>
+            <h3 class="message" style="color: green"></h3>
+            <header>
+                <nav>
+
+                    <div id="nav-left">
+                        <div class="nav-right uk-icon=home uk-text-danger">
+                            <a href="http://localhost/forum/index.php?ctrl=home&amp;action=index">Accueil</a>
+                                                            <a href="http://localhost/forum/index.php?ctrl=forum&amp;action=listUsers">Liste des utilisateurs</a>
+                              
+                                
+                            
+                                                            <a href="http://localhost/forum/index.php?ctrl=security&amp;action=profile"><span class="fas fa-user"></span>&nbsp;AdminUser</a>
+                                <a href="http://localhost/forum/index.php?ctrl=security&amp;action=logout">Déconnexion</a>
+                                <a href="http://localhost/forum/index.php?ctrl=forum&amp;action=listCategories">Liste des catégories</a>
+                                
+                                
+
+                           
+                        </div>
+                    </div>  
+                        </nav></header></div>
+                        </div>
+                
+                
+            
+        
+
+            <main id="forum">
+                <!-- Formulaire pour se connecter  -->
+<h1 class="uk-child-width-1-2@s uk-text-center uk-text-muted">Se connecter</h1>
+
+
+<p class="uk-child-width-1-2@s uk-text-center uk-text-muted">Renseignez les champs afin de vous</p>
+<form action="http://localhost/forum/index.php?ctrl=security&amp;action=login" method="POST" class="uk-form-stacked uk-margin-large-top uk-text-muted">
+    <div class="uk-margin uk-icon=user">
+        
+    <label class="uk-form-label uk-form uk-child-width-1-2@s uk-text-muted" for="mail"> <span uk-icon="user" class="uk-icon">Email<svg width="20" height="20" viewBox="0 0 20 20"><circle fill="none" stroke="#000" stroke-width="1.1" cx="9.9" cy="6.4" r="4.4"></circle><path fill="none" stroke="#000" stroke-width="1.1" d="M1.5,19 C2.3,14.5 5.8,11.2 10,11.2 C14.2,11.2 17.7,14.6 18.5,19.2"></path></svg></span></label>
+        <div class="uk-form-controls">
+            
+         <input class="uk-input" id="mail" name="mail" type="mail" required="">
+            
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label uk-text-muted" for="password">Mot de passe</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="password" name="password" type="password" required="">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <button class="uk-button uk-button-secondary uk-form-controls" type="submit" name="submit">Se connecter</button>
+    </div>
+</form>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 ms-0">
+            <!-- Formulaire aligné à gauche avec une marge minimale -->
+            <form action="http://localhost/forum/index.php?ctrl=security&amp;action=login" method="POST" class="ms-0">
+                <h1 class="text-muted">Se connecter</h1>
+                <p class="text-muted">Veuillez remplir les champs ci-dessous pour vous connecter.</p>
+                <div class="mb-3">
+                    <label for="mail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="mail" name="mail" required="">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required="" style="
+    text-align: left;
+    justify-content: left;
+    align-items: left;
+">
+                </div>
+                <button type="submit" class="btn btn-secondary">Se connecter</button>
+            </form>
+        </div>
+    </div>
+</div>
+        
+    
+
+    <!-- Bootstrap JS (nécessaire si tu veux des fonctionnalités comme les modals, alertes dynamiques, etc.) -->
+    <script src="./FORUM_files/bootstrap.bundle.min.js.téléchargement"></script>
+
+<!-- <a href="index.php?ctrl=security&action=login">Se connecter</a>
+<a href="index.php?ctrl=security&action=register">S'inscrire</a> -->                <div>
+                        </div>
+            
+
+            </main>
+       
+       
+    
+    <script src="./FORUM_files/jquery-3.4.1.min.js.téléchargement" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+        </script>
+    <script>
+        $(document).ready(function () {
+            $(".message").each(function () {
+                if ($(this).text().length > 0) {
+                    $(this).slideDown(500, function () {
+                        $(this).delay(3000).slideUp(500)
+                    })
+                }
+            })
+            $(".delete-btn").on("click", function () {
+                return confirm("Etes-vous sûr de vouloir supprimer?")
+            })
+            tinymce.init({
+                selector: '.post',
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | help',
+                content_css: '//www.tiny.cloud/css/codepen.min.css'
+            });
+        })
+    </script>
+    <script src="./FORUM_files/script.js.téléchargement"></script>
+    <script src="./FORUM_files/uikit.min.js.téléchargement"></script>
+    <script src="./FORUM_files/uikit-icons.min.js.téléchargement"></script>
+    <script src="./FORUM_files/tinymce.min.js.téléchargement" referrerpolicy="origin"></script>
+   
+
+
+
+</body></html>

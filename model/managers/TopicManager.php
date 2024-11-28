@@ -30,6 +30,8 @@ class TopicManager extends Manager{
     }
 
 
+
+
     // récupérer tous les topics d'une catégorie spécifique (par son id)
     public function findTopicsByCategory($id) {
 
@@ -66,6 +68,23 @@ class TopicManager extends Manager{
             $this->className
         );
     }
+
+    public function findLastFiveTopics(){
+        $sql = "SELECT t.title, t.creationDate, t.category_id, t.user_id
+        FROM ".$this->tableName." t
+        ORDER BY t.creationDate DESC
+        LIMIT 5";
+
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
+        
+    }
+
+
+
+
     public function deleteTopicsByUser($userId) {
         // Supprimer les topics créés par l'utilisateur
         $sql = "DELETE FROM ".$this->tableName." WHERE user_id = :user_id";

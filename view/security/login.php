@@ -3,27 +3,31 @@
 
 
 <p class="uk-child-width-1-2@s uk-text-center uk-text-muted">Renseignez les champs afin de vous</p>
-<form action="index.php?ctrl=security&action=login" method="POST" class="uk-form-stacked uk-margin-large-top uk-text-muted">
-    <div class="uk-margin uk-icon=user">
-        
-    <label class="uk-form-label uk-form uk-child-width-1-2@s uk-text-muted" for="mail"> <span uk-icon="user">Email</span></label>
-        <div class="uk-form-controls">
-            
-         <input class="uk-input" id="mail" name="mail" type="mail" required>
-            
-        </div>
-    </div>
-    <div class="uk-margin">
-        <label class="uk-form-label uk-text-muted" for="password">Mot de passe</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="password" name="password" type="password" required>
-        </div>
-    </div>
-    <div class="uk-margin">
-        <button class="uk-button uk-button-secondary uk-form-controls" type="submit" name="submit">Se connecter</button>
-    </div>
-</form>
 
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 ms-0">
+            <!-- Formulaire aligné à gauche avec une marge minimale -->
+            <form action="index.php?ctrl=security&action=login" method="POST">
+               
+                <div class="mb-3">
+                    <label for="mail" class="form-label uk-text-center">Email</label>
+                    <input type="mail" class="form-control" id="mail" name="mail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Se connecter</button>
+            </form>
+        </div>
+    </div>
+</div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (nécessaire si tu veux des fonctionnalités comme les modals, alertes dynamiques, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- <a href="index.php?ctrl=security&action=login">Se connecter</a>
 <a href="index.php?ctrl=security&action=register">S'inscrire</a> -->
