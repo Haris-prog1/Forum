@@ -15,16 +15,16 @@ class SecurityController extends AbstractController{
     $user = filter_input(INPUT_POST, "nickName", FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST,"mail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST,"password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    // var_dump($user);
-    // var_dump($email);
-    // var_dump($password);
+   
 
     $userManager = new UserManager();
-
+    $creationDate = date('Y-m-d H:i:s');
+    $banned = "0";
+    $role = "ROLE_USER";
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     if ($user){
     //Ajoute de l'utilisateur à la base de données
-    $userManager->add(["nickName" => $user, "mail" =>$email, "password" => $passwordHash,]);
+    $userManager->add(["creationTime" => $creationDate,"nickName" => $user, "mail" =>$email, "password" => $passwordHash, "isBanned" => $banned, "role" => $role]);
 
 }
         return [

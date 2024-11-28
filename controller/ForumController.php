@@ -185,11 +185,15 @@ public function profile(){
                 $postManager = new PostManager();
                 $topicManager = new TopicManager();
                 $topic = $topicManager->findOneById($id);
+                $userId = Session::getUser()->getId();
+                $creationDate = date('Y-m-d H:i:s');
 
                 
                 $data = [
                     'content' => $content,
+                    'user_id' => $userId,
                     'topic_id' => $id,
+                    'creationDate' => $creationDate,
                     
                 ];
                 // Ajout de la data en base de données
@@ -235,20 +239,21 @@ public function profile(){
          $postManager = new PostManager();
          
 
-        
+    
 
          // récupère tous les topics d'une catégorie spécifique (par son id)
          
          $topics = $topicManager->findTopicsByCategory($id);
-         
+        //  var_dump($topics);
+        //  die;
 
     
          //Récupération de l'user en session si il y en à un
-        
+      
          $userId = Session::getUser()->getId();
-
-          
-
+         
+         $creationDate = date('Y-m-d H:i:s');
+        
 
         //  Vérification si il y a des données dans la varaible $content
         if($title){
@@ -257,7 +262,11 @@ public function profile(){
                 $data = [
                     
                    'title' => $title,
-                //    'category_id' => $postId
+                    
+                    'creationDate' => $creationDate,
+                    'category_id' => $id,
+                    'user_id' => $userId,
+
                     
                    
                 ];
@@ -267,18 +276,16 @@ public function profile(){
         // On ajout les données du tableau via la fonction add et comme pour valeur $data
        
         $topic = $topicManager->add($data);
-        $dataContent = [
-            'content' => $content,
+        // $dataContent = [
+            
+        //     'content' => $content,
             
             
 
-        ];
-        $post = $postManager->add($dataContent);
+        // ];
+        // $post = $postManager->add($dataContent);
 
 
-        // var_dump($dataContent);
-        // var_dump($data);
-        // die;
 
         // Affiche un message de succès si le processus est réussi
          Session::addFlash("success", "Le topic a été rajouté avec succès.");

@@ -4,6 +4,7 @@
     
 ?>
 <div>
+    <h1 class= "uk-heading-line uk-text-center">Liste des catégories</h1>
 <?php
 if (!empty($categories)) {
 // Liste des catégories affichés
@@ -16,7 +17,6 @@ else{ ?>
     
 <?php } ?>
 
-<h1 class= "uk-heading-line uk-text-center">Liste des catégories</h1>
 <!-- Formulaire d'ajouts de catégorie -->
 <form action="index.php?ctrl=forum&action=addCategory"<?= $category->getId()?> method= "POST">
 <div class="uk-margin">
