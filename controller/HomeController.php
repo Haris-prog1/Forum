@@ -5,19 +5,19 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\PostManager;
 use Model\Managers\UserManager;
+use Model\Managers\TopicManager;
 
 class HomeController extends AbstractController implements ControllerInterface {
 
     public function index(){
         $postManager = new PostManager();
-        var_dump($id);
-        die;
-        $posts = $postManager->findLastFivePosts($id);
+       
+        $posts = $postManager->findLastFivePosts();
 
       
         $topicManager = new TopicManager();
 
-        $topics = $topicManager->findLastFiveTopics($id);
+        $topics = $topicManager->findLastFiveTopics();
         
         return [
             "view" => VIEW_DIR."home.php",
@@ -50,11 +50,11 @@ class HomeController extends AbstractController implements ControllerInterface {
             ]
         ];
     }
-    public function findLastFiveTopics($id){
+    public function findLastFiveTopics(){
 
         $topicManager = new TopicManager();
 
-        $topics = $topicManager->findLastFiveTopics($id);
+        $topics = $topicManager->findLastFiveTopics();
         
 
         return [

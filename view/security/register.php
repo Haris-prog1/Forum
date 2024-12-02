@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h1>Inscription</h1>
+    <h1 class="titlePage">Inscription</h1>
 </head>
 <body>
     <form action="index.php?ctrl=security&action=register" method="POST" class="uk-form-stacked ">

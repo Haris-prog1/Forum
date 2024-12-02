@@ -2,7 +2,7 @@
   $users = $result["data"]["user"];
 ?>
 
-
+<p> Affichons quelque chose </p>
 <?php
 
 

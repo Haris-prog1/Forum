@@ -1,8 +1,8 @@
 <!-- Formulaire pour se connecter  -->
-<h1 class="uk-child-width-1-2@s uk-text-center uk-text-muted">Se connecter</h1>
+<h1 class="uk-child-width-1-2@s uk-text-center uk-text-warning">Se connecter</h1>
 
 
-<p class="uk-child-width-1-2@s uk-text-center uk-text-muted">Renseignez les champs afin de vous</p>
+<p class="uk-child-width-1-2@s uk-text-center uk-text-warning">Renseignez les champs afin de vous</p>
 
 <div class="container mt-5">
     <div class="row">

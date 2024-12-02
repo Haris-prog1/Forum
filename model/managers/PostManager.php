@@ -66,17 +66,19 @@ public function findPostsByUser($userId) {
         $this->className
     );
 }
-public function findLastFivePosts($id){
-    $sql = "SELECT t.title, t.creationDate, t.category_id, t.user_id
-FROM ".$this->tableName."
-ORDER BY t.creationDateDESC
-LIMIT 5";
-
-return $this->getMultiplesResults(
-    DAO::select($sql, ['id_post' => $id]),
-    $this->className
-);
-
+public function findLastFivePosts(){
+    $sql = "SELECT *
+     FROM ".$this->tableName." t
+     ORDER BY t.creationDate DESC
+     LIMIT 5";
+    
+  
+  
+     return $this->getMultipleResults(
+    
+     DAO::select($sql),
+     $this->className
+ );
 
 }
 

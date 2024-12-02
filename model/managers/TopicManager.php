@@ -70,18 +70,18 @@ class TopicManager extends Manager{
     }
 
     public function findLastFiveTopics(){
-        $sql = "SELECT t.title, t.creationDate, t.category_id, t.user_id
-        FROM ".$this->tableName." t
-        ORDER BY t.creationDate DESC
+        $sql = "SELECT *
+        FROM topic t
+        ORDER BY t.creationDate
         LIMIT 5";
-
+       
+ 
         return $this->getMultipleResults(
-            DAO::select($sql, ['id' => $id]),
+            DAO::select($sql),
             $this->className
         );
-        
+       
     }
-
 
 
 

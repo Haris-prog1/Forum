@@ -9,7 +9,7 @@
 
 
 
-     <p class="uk-heading-line uk-text-left uk-text-uppercase uk-text-muted uk-text-center">Résumé du post </p><br><br>
+     <h1 class="uk-heading-line uk-text-left uk-text-uppercase uk-text-warning uk-text-center">Résumé du post </h1><br><br>
 
    
 
@@ -19,9 +19,9 @@
      <?php
      if (!empty($posts)){
      foreach ($posts as $post){ ?>
-        <p class="uk-heading-line uk-text-left uk-text-uppercase uk-text-muted uk-text-center uk-child-width-1-2@s uk-text-center"><?= $topic->getTitle()?></a></p></div>
+        <h3 class="uk-heading-line uk-text-left uk-text-uppercase uk-text-warning uk-text-center uk-child-width-1-2@s uk-text-center"><?= $topic->getTitle()?></a></h3></div>
         
-        <p class="uk-heading-line uk-text-left uk-text-uppercase uk-text-muted uk-text-center uk-child-width-1-2@s uk-text-center"><?= $post->getContent()?></a></p></div>
+        <h3 class="uk-heading-line uk-text-left uk-text-uppercase uk-text-warning uk-text-center uk-child-width-1-2@s uk-text-center"><?= $post->getContent()?></a></h3></div>
       
         <?php
         
@@ -33,7 +33,7 @@
     
  }}
  else {
-  ?>  <p>Aucun post disponible.</p>
+  ?>  <h2>Aucun post disponible.</h2>
    
 <?php } ?>
 
